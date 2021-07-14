@@ -1,7 +1,8 @@
-import logo from "./logo.svg";
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
+import Header from "./components/Header";
+import UserInput from "./components/UserInput";
+import PushUpList from "./components/PushUpList";
 
 function App() {
   const [pushUpList, setPushUpList] = useState([]);
@@ -34,66 +35,17 @@ function App() {
     setCount("");
     setPNumber("");
   };
-  const pushUpListContainer = pushUpList.map((user) => {
-    return (
-      <li className="list-group-item">
-        {user.userName} : {user.count}
-      </li>
-    );
-  });
   return (
     <div className="container">
-      <h1> Pushups Masters </h1>
-      <h4>
-        Remember to enter your daily entries to stay active for your total
-        amount otherwise your total count will be removed after 72 hours!
-      </h4>
-      <div className="row g-2">
-        <div className="col-md">
-          <div className="form-floating">
-            <input
-              value={userName}
-              onChange={handleChange}
-              className="username form-control"
-              id="usernameInput"
-            ></input>
-            <label for="usernameInput">Username</label>
-          </div>
-        </div>
-        <div className="col-md">
-          <div className="form-floating">
-            <input
-              value={count}
-              onChange={handleChange}
-              className="totalReps form-control"
-              id="userReps"
-            ></input>
-            <label for="userReps">Number of Reps</label>
-          </div>
-        </div>
-        <div className="col-md">
-          <div className="form-floating">
-            <input
-              value={pnumber}
-              onChange={handleChange}
-              className="userNumber form-control"
-              id="userNumber"
-            ></input>
-            <label for="userNumber">Phone Number (Optional)</label>
-          </div>
-        </div>
-        <div className="col-md">
-          <button
-            className="submit btn btn-outline-secondary"
-            onClick={onSubmit}
-          >
-            Submit
-          </button>
-        </div>
-      </div>
-      <div className="card mt-4">
-        <ul className="list-group list-group-flush">{pushUpListContainer}</ul>
-      </div>
+      <Header />
+      <UserInput
+        userName={userName}
+        count={count}
+        pnumber={pnumber}
+        handleChange={handleChange}
+        onSubmit={onSubmit}
+      />
+      <PushUpList pushUpList={pushUpList} />
     </div>
   );
 }
